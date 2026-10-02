@@ -1,5 +1,6 @@
 package com.example.multas.controller;
 
+import com.example.multas.domain.PagoRechazadoException;
 import com.example.multas.model.LimiteMultasPendientesException;
 import com.example.multas.model.MultaNotFoundException;
 import com.example.multas.model.MultaYaPagadaException;
@@ -31,8 +32,14 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> handleValidation(MethodArgumentNotValidException ex) {
         Map<String, String> errores = new HashMap<>();
-        ex.getBindingResult().getFieldErrors()
-                .forEach(e -> errores.put(e.getField(), e.getDefaultMessage()));
+        ex.getBindingResult().getFieldErrors().forEach(e -> errores.put(e.getField(), e.getDefaultMessage()));
         return errores;
+    }
+
+    // NUEVO MANEJADOR PARTE 2: Rechazo de Pago (402 Payment Required)
+    @ExceptionHandler(PagoRechazadoException.class)
+    @ResponseStatus(HttpStatus.PAYMENT_REQUIRED)
+    public Map<String, String> handlePagoRechazado(PagoRechazadoException ex) {
+        return Map.of("error", ex.getMessage());
     }
 }
