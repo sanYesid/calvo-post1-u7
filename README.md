@@ -70,7 +70,7 @@ calvo-post1-u7/
             │   │   ├── PagosUdesAdapter.java
             │   │   └── WompiAdapter.java
             │   └── config/RestTemplateConfig.java
-            └── MultasApplicationApiApplication.java
+            └── MultasBibliotecaApiApplication.java
 ```
 
 Dirección de las dependencias en la Parte 2: `MultaService → PasarelaPagoPort ← PagosUdesAdapter / WompiAdapter`. El Service depende de la abstracción y los adaptadores dependen del puerto; el dominio nunca conoce a los adaptadores.
@@ -190,7 +190,7 @@ Frente al requisito de las dos pasarelas se evaluaron tres opciones: **A** (rama
 - `domain/` queda libre de Spring y de clientes HTTP, y el Service es testeable con un puerto simulado.
 
 **Qué costó adicionalmente:**
-- Dos paquetes nuevos (`domain/` e `infrastructure/`) y seis clases/archivos adicionales (puerto, `ResultadoPago`, `PagoRechazadoException`, dos adaptadores, `RestTemplateConfig` y la configuración), frente a una sola interfaz y dos clases con la opción B.
+- Dos paquetes nuevos (`domain/` e `infrastructure/`) y seis clases/archivos adicionales (puerto, `ResultadoPago`, `PagoRechazadoException`, dos adaptadores, `RestTemplateConfig`), frente a una sola interfaz y dos clases con la opción B.
 - Una capa de traducción por proveedor y un tipo de dominio extra que hay que mantener neutral.
 - Más curva de aprendizaje: el equipo debe entender la dirección de las dependencias (`Service → Puerto ← Adaptador`) y por qué existen `domain/` y `model/` a la vez.
 - Una pureza solo parcial: `PasarelaPagoPort.procesar(Multa)` recibe la entidad `Multa`, que vive en `model/` y lleva anotaciones JPA. El puerto no importa Spring, pero depende de una entidad persistente; un hexagonal estricto habría usado un tipo de dominio sin anotaciones de persistencia. Se aceptó para no migrar `Multa` a hexagonal, lo cual se consideró sobre-ingeniería para este alcance.
