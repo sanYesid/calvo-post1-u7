@@ -44,7 +44,7 @@ La API se organiza en cuatro capas con responsabilidades separadas y dependencia
 ### Estructura final de paquetes
 
 ```
-apellido-post1-u7/
+calvo-post1-u7/
 └── multas-biblioteca-api/
     ├── pom.xml
     └── src/main/
@@ -70,7 +70,7 @@ apellido-post1-u7/
             │   │   ├── PagosUdesAdapter.java
             │   │   └── WompiAdapter.java
             │   └── config/RestTemplateConfig.java
-            └── MultasApplication.java
+            └── MultasApplicationApiApplication.java
 ```
 
 Dirección de las dependencias en la Parte 2: `MultaService → PasarelaPagoPort ← PagosUdesAdapter / WompiAdapter`. El Service depende de la abstracción y los adaptadores dependen del puerto; el dominio nunca conoce a los adaptadores.
