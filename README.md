@@ -211,6 +211,6 @@ Las dos partes mostraron que la ubicación de cada regla depende de qué necesit
 | Cuarta multa pendiente del mismo estudiante | 409 Conflict | ![Cuarta multa](docs/409-conflit2.jpg) |
 | `GET /api/multas/999` | 404 Not Found | ![ID inexistente](docs/404-not.jpg) |
 | `PATCH /api/multas/{id}/pagar` y repetirlo | 200 `PAGADA`/`VENTANILLA`; segundo intento 409 | ![Pago ventanilla](docs/ventanilla2.jpg) |
-| Pago en línea con `pagosudes` | Usa `PagosUdesAdapter` | ![PagosUDES](docs/pago-udes-jpg) |
-| Pago en línea con `wompi` (sin tocar código)-Pago rechazado por la pasarela | Usa `WompiAdapter` -402 con el mensaje del proveedor | ![Wompi](docs/wompi-402) |
+| Pago en línea con `pagosudes` | Usa `PagosUdesAdapter` | ![PagosUDES](docs/pago-udes.jpg) |
+| Pago en línea con `wompi` (sin tocar código)-Pago rechazado por la pasarela | Usa `WompiAdapter` -402 con el mensaje del proveedor | ![Wompi](docs/wompi-402.jpg) |
 | Pagar una multa ya pagada | 409 Conflict (ventanilla y en línea) | ![Ya pagada](docs/ventanilla-duplicado.jpg) |
